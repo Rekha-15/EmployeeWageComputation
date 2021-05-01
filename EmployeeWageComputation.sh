@@ -13,8 +13,19 @@ function attendance()
 	fi
 }
 
-
 attendance
+
+
+
+
+IS_PART_TIME=
+IS_FULL_TIME=2;
+MAX_HRS_IN_MONTH=100;
+EMP_RATE_PER_HR=;
+NUM_WORKING_DAYS=20;
+
+totalWorkHours=0;
+totalWorkingDays=0;
 
 
 IS_PART_TIME=1;
@@ -23,8 +34,10 @@ MAX_HRS_IN_MONTH=100;
 EMP_RATE_PER_HR=20;
 NUM_WORKING_DAYS=20;
 
-totalWorkHours=0;
+totalEmpHr=0;
 totalWorkingDays=0;
+
+declare -A dailywage
 
 function getWorkHrs() {
         case $1 in
@@ -49,8 +62,7 @@ do
         empCheck=$((RANDOM%3))
         getWorkHrs $empCheck
         totalEmpHrs=$(($totalEmpHrs + $empHrs))
-        dailyWages[$totalWorkingDays]=$(($empHrs*$EMP_RATE_PER_HR))
+        dailyWage["$totalWorkingDays"]=$(($empHrs*$EMP_RATE_PER_HR))
 done
 
 totalSalary="$( getEmpWage $totalEmpHrs )"
-
